@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "hexo generate",
-    "clean": "hexo clean",
-    "deploy": "hexo deploy",
-    "server": "hexo server",
-    "netlify": "npm run clean && npm run build"
+  "build": "npx hexo generate",
+  "clean": "npx hexo clean",
+  "deploy": "npx hexo deploy",
+  "server": "npx hexo server",
+  "netlify": "npm run clean && npm run build"
   },
+
   "hexo": {
     "version": "7.3.0"
   },
