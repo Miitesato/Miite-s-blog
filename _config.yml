@@ -11,6 +11,11 @@ author: Miitesato
 language: en
 timezone: ''
 
+
+# MathJax 
+math:
+  engine: mathjax
+
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://example.com
