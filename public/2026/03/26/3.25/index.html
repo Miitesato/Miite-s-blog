@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2.系统状态方程描述 | Miite 's blog (^^)/</title><meta name="author" content="Miitesato"><meta name="copyright" content="Miitesato"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对于Assumption 1矩阵W的理解：  $W_{rs}$ ∈ $R^{q_r×q_s}$ ,表示第 r 簇有 $q_r$ 个节点，第 s 簇有 $q_s$ 个节点。 判断两个簇之间的影响时（以第 r 簇对第 s 簇的影响为例） 设 s 簇的状态向量为  $x_s(t) &#x3D; \begin{pmatrix} x_{s1}(t) \ x_{s2}(t) \ \vdots \ x_{sq_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.系统状态方程描述">
+<meta property="og:url" content="http://example.com/2026/03/26/3.25/index.html">
+<meta property="og:site_name" content="Miite &#39;s blog (^^)&#x2F;">
+<meta property="og:description" content="对于Assumption 1矩阵W的理解：  $W_{rs}$ ∈ $R^{q_r×q_s}$ ,表示第 r 簇有 $q_r$ 个节点，第 s 簇有 $q_s$ 个节点。 判断两个簇之间的影响时（以第 r 簇对第 s 簇的影响为例） 设 s 簇的状态向量为  $x_s(t) &#x3D; \begin{pmatrix} x_{s1}(t) \ x_{s2}(t) \ \vdots \ x_{sq_">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2026-03-25T16:09:00.000Z">
+<meta property="article:modified_time" content="2026-03-25T16:11:37.333Z">
+<meta property="article:author" content="Miitesato">
+<meta property="article:tag" content="ETIC-based cluster synchronization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2.系统状态方程描述",
+  "url": "http://example.com/2026/03/26/3.25/",
+  "image": "http://example.com/img/avatar.jpg",
+  "datePublished": "2026-03-25T16:09:00.000Z",
+  "dateModified": "2026-03-25T16:11:37.333Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Miitesato",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/03/26/3.25/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2.系统状态方程描述',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Miite 's blog (^^)/</span></a><a class="nav-page-title" href="/"><span class="site-name">2.系统状态方程描述</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">2.系统状态方程描述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-03-25T16:09:00.000Z" title="Created 2026-03-26 00:09:00">2026-03-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-03-25T16:11:37.333Z" title="Updated 2026-03-26 00:11:37">2026-03-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><strong>对于Assumption 1矩阵W的理解：</strong></p>
+<p> $W_{rs}$ ∈ $R^{q_r×q_s}$ ,表示第 r 簇有 $q_r$ 个节点，第 s 簇有 $q_s$ 个节点。</p>
+<p>判断两个簇之间的影响时（以第 r 簇对第 s 簇的影响为例）</p>
+<p>设 s 簇的状态向量为  $x_s(t) &#x3D; \begin{pmatrix} x_{s1}(t) \ x_{s2}(t) \ \vdots \ x_{sq_s}(t) \end{pmatrix}$， $x_{sj}(t)$ ∈ $R^n$, $x_{s}(t)$ ∈ $R^{q_sn }$</p>
+<p>设 r 簇的状态向量为 $x_r(t) &#x3D; \begin{pmatrix} x_{r1}(t) \ x_{r2}(t) \ \vdots \ x_{rq_r}(t) \end{pmatrix}$</p>
+<p><strong>则 s 簇对 r 簇的影响可以写成：</strong></p>
+<p>r1：<br>$$<br>c \Big(<br>w_{r1s1}<br>\begin{pmatrix}<br>\pi_1 x_{s11}(t-\tau_0)\<br>\pi_2 x_{s12}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{s1n}(t-\tau_0)<br>\end{pmatrix}<br>+<br>w_{r1s2}<br>\begin{pmatrix}<br>\pi_1 x_{s21}(t-\tau_0)\<br>\pi_2 x_{s22}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{s2n}(t-\tau_0)<br>\end{pmatrix}<br>+<br>\cdots<br>+<br>w_{r1sq}<br>\begin{pmatrix}<br>\pi_1 x_{sq_s1}(t-\tau_0)\<br>\pi_2 x_{sq_s2}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{sq_sn}(t-\tau_0)<br>\end{pmatrix}<br>\Big)<br>$$</p>
+<p>r2：<br>$$<br>c \Big(<br>w_{r2s1}<br>\begin{pmatrix}<br>\pi_1 x_{s11}(t-\tau_0)\<br>\pi_2 x_{s12}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{s1n}(t-\tau_0)<br>\end{pmatrix}<br>+<br>w_{r2s2}<br>\begin{pmatrix}<br>\pi_1 x_{s21}(t-\tau_0)\<br>\pi_2 x_{s22}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{s2n}(t-\tau_0)<br>\end{pmatrix}<br>+<br>\cdots<br>+<br>w_{r2sq}<br>\begin{pmatrix}<br>\pi_1 x_{sq_s1}(t-\tau_0)\<br>\pi_2 x_{sq_s2}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{sq_sn}(t-\tau_0)<br>\end{pmatrix}<br>\Big)<br>$$</p>
+<p>  ……</p>
+<p>r$q_r$:<br>$$<br>c \Big(<br>w_{rq_rs1}<br>\begin{pmatrix}<br>\pi_1 x_{s11}(t-\tau_0)\<br>\pi_2 x_{s12}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{s1n}(t-\tau_0)<br>\end{pmatrix}<br>+<br>w_{rq_rs2}<br>\begin{pmatrix}<br>\pi_1 x_{s21}(t-\tau_0)\<br>\pi_2 x_{s22}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{s2n}(t-\tau_0)<br>\end{pmatrix}<br>+<br>\cdots<br>+<br>w_{rq_rsq}<br>\begin{pmatrix}<br>\pi_1 x_{sq_s1}(t-\tau_0)\<br>\pi_2 x_{sq_s2}(t-\tau_0)\<br>\vdots\<br>\pi_n x_{sq_sn}(t-\tau_0)<br>\end{pmatrix}<br>\Big)<br>$$</p>
+<p>即<br>$$<br>x_r(t)<br>&#x3D; \begin{pmatrix} x_{r1}(t) \ x_{r2}(t) \ \vdots \ x_{rq_r}(t) \end{pmatrix}&#x3D;<br>c<br>\begin{bmatrix}<br>w_{r1,s1}\Psi &amp; w_{r1,s2}\Psi &amp; \cdots &amp; w_{r1,s q_s}\Psi \<br>w_{r2,s1}\Psi &amp; w_{r2,s2}\Psi &amp; \cdots &amp; w_{r2,s q_s}\Psi \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>w_{r q_r,s1}\Psi &amp; w_{r q_r,s2}\Psi &amp; \cdots &amp; w_{r q_r,s q_s}\Psi<br>\end{bmatrix}<br>\begin{pmatrix}<br>x_{s1}(t-\tau_0) \<br>x_{s2}(t-\tau_0) \<br>\vdots \<br>x_{s q_s}(t-\tau_0)<br>\end{pmatrix}<br>$$</p>
+<p>令<br>$$<br>W_{rs}&#x3D;\begin{bmatrix}<br>w_{r1,s1} &amp; w_{r1,s2} &amp; \cdots &amp; w_{r1,s q_s} \<br>w_{r2,s1} &amp; w_{r2,s2} &amp; \cdots &amp; w_{r2,s q_s} \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>w_{r q_r,s1} &amp; w_{r q_r,s2} &amp; \cdots &amp; w_{r q_r,s q_s}<br>\end{bmatrix}<br>$$</p>
+<p>$W_{rs}$ ∈ $R^{q_r×q_s}$ ,表示第 r 簇有 $q_r$ 个节点，第 s 簇有 $q_s$​ 个节点。</p>
+<p>则 $W_{rs}$ 可以反映 s 簇对 r 簇的影响。矩阵对称，即$w_{ij}$ &#x3D; $w_{ji}$ ,即节点 j 对节点 i 的影响与节点 i 对节点 j 的影响相同（无向图）</p>
+<p><strong>Lemma1</strong>（证明脉冲系统的全局指数稳定，且无芝诺行为）</p>
+<p>去除随机扰动项后的脉冲系统如下：<br>$$<br>\begin{cases}<br>\dot{w}(t)&#x3D;dw(t)&#x2F;dt &#x3D; \mathcal{F}(t, w(t), w(t - \tau_0)) , \quad t \geq t_0, \quad t \neq t_k \<br>w(t_k) &#x3D; \mathcal{H}<em>k(z_k, w(z_k)), \quad k \in Z</em>+ \<br>w(\varepsilon) &#x3D; \zeta(\varepsilon), \quad \varepsilon \in [t_0 - \tau_0, t_0]<br>\end{cases}<br>$$</p>
+<ul>
+<li>$ w(t) \in \mathbb{R}^{Nn} $：状态向量。</li>
+<li>$ \mathcal{F}, \mathcal{G} \in C([t_{k-1}, t_k) \times \mathbb{C}, \mathbb{R}^{Nn}) $：函数 $ \mathcal{F} $ 在区间 $[t_{k-1}, t_k)$ 与函数空间 $ \mathbb{C} $ 上连续。</li>
+<li>$ \mathbb{C} \in PC([t_0 - \tau_0, t_0], \mathbb{R}^{Nn}) $：$ \mathbb{C} $ 表示分段连续函数空间，定义域为 $[t_0 - \tau_0, t_0]$，值域为 $\mathbb{R}^{Nn}$。</li>
+<li>$ \mathcal{F}(t, 0) &#x3D; \mathcal{G}(t, 0) &#x3D; 0, \quad \forall t \geq t_0 $：系统在零状态下的平衡条件。</li>
+<li>$ \mathcal{H}_k \in C(\Omega \times \mathbb{R}^{Nn}, \mathbb{R}^{Nn}) $：脉冲函数 $ \mathcal{H}_k $ 在 $\Omega \times \mathbb{R}^{Nn}$ 上连续。</li>
+<li>$ \Omega $：脉冲激活时间的集合。</li>
+<li>$ \mathcal{H}<em>k(t_k, 0) &#x3D; 0, \quad \forall k \in \mathbb{Z}</em>+ $：脉冲函数在零状态下的平衡条件。</li>
+<li>$ \zeta \in PC([t_0 - \tau_0, t_0], \mathbb{R}^{Nn}) $：初始函数，属于分段连续函数空间。</li>
+<li>范数定义：$|s| &#x3D; \sup\limits_{t_0 - \tau_0 \leq \varepsilon \leq t_0} |\zeta(\varepsilon)|$。</li>
+</ul>
+<p>假设 $V(t, w(t)) \in v_0$，且存在正常数 $a$, $b$, $b \leq a$, $\tau_k$, $\gamma$, $\alpha_k$, $M$, $d_k$, $\sigma_1$, $\sigma_2$, ${\vartheta} $ 满足以下条件。</p>
+<p>1) </p>
+<p>$<br>\sigma_1 |w(t)|^{\vartheta} \leq V(t, w(t)) \leq \sigma_2 |w(t)|^{\vartheta}  \quad \forall (t, w(t)) \in [t_0 - \tau_0, +\infty) \times \mathbb{R}^{Nn}.<br>$</p>
+<ol start="2">
+<li></li>
+</ol>
+<p>$<br>\Phi V(t, w(t)) \leq aV(t, w(t)) \quad \forall t \in [t_{k-1}, z_k) \text{ 当 } e^{\gamma \theta} V(t + \theta, w(t + \theta)) \leq e^{M} V(t, w(t)) \text{ 时},<br>$<br>$<br>\text{且 } \Phi V(t, w(t)) \leq bV(t, w(t)) \quad \forall t \in [z_k, t_k).<br>$</p>
+<ol start="3">
+<li></li>
+</ol>
+<p>$<br>V(t_k) \leq e^{-(d_k + \gamma \tau_k)} V(z_k),<br>$<br>其中 $t_k &#x3D; z_k + \tau_k$，$z_k$ 由事件脉冲触发条件（ETIC）定义如下：<br>$<br>z_k &#x3D; \inf{t &gt; t_{k-1} \mid \Gamma(t) \geq 0}, \quad k \in \mathbb{Z}<em>+ \tag{8}<br>$<br>其中<br>$<br>\Gamma(t) &#x3D; e^{\gamma(t-t_0)} V(t) - e^{\alpha_k} \left[ e^{\gamma(t</em>{k-1}-t_0)} V(t_{k-1}) \lor V_{t_0} \right],<br>$<br>$<br>V_{t_0} &#x3D; \sup_{\epsilon \in [t_0-\tau_0, t_0]} V(\epsilon, \zeta(\epsilon)).<br>$</p>
+<ol start="4">
+<li></li>
+</ol>
+<p>$<br>\alpha_k + (b + \gamma) \tau_k + \sum_{i&#x3D;1}^l (\alpha_{k-i} - d_{k-i}) \leq M,<br>$<br>$<br>\lim_{k \to \infty} \sum_{i&#x3D;1}^k \alpha_i + (b + \gamma) \tau_i \to \infty, \quad l \in I[1, k-1],<br>$<br>$<br>k \in \mathbb{Z}_+.<br>$</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Miitesato</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/03/26/3.25/">http://example.com/2026/03/26/3.25/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ETIC-based-cluster-synchronization/">ETIC-based cluster synchronization</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/03/22/3.22/" title="1.节点状态方程描述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">1.节点状态方程描述</div></div><div class="info-2"><div class="info-item-1">问题背景随机复杂网络（SCNs）的 N 个节点被分为 j 簇 （2 ≤ j ≤N） $ Q_1$&#x3D; {1, 2, …，$q_1$ }                                                                                                                                        - 共 $q_1$ 项  $ Q_2$&#x3D; {$q_1+1 $, $q_1+2$ , …，$q_1+q_2$ }                                                                                                           - 共 $q_2$ 项 … $ Q_j$&#x3D; {$q_1+q_2+…+q_{j-1}+1$, $q_1+q_2+…+q_{j-1}+2$, …，$q_1+q_2+…+q_{j-1}+q_j$ }         - 共 $q_j$ 项 其...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/22/3.22/" title="1.节点状态方程描述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-22</div><div class="info-item-2">1.节点状态方程描述</div></div><div class="info-2"><div class="info-item-1">问题背景随机复杂网络（SCNs）的 N 个节点被分为 j 簇 （2 ≤ j ≤N） $ Q_1$&#x3D; {1, 2, …，$q_1$ }                                                                                                                                        - 共 $q_1$ 项  $ Q_2$&#x3D; {$q_1+1 $, $q_1+2$ , …，$q_1+q_2$ }                                                                                                           - 共 $q_2$ 项 … $ Q_j$&#x3D; {$q_1+q_2+…+q_{j-1}+1$, $q_1+q_2+…+q_{j-1}+2$, …，$q_1+q_2+…+q_{j-1}+q_j$ }         - 共 $q_j$ 项 其...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Miitesato</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/26/3.25/" title="2.系统状态方程描述">2.系统状态方程描述</a><time datetime="2026-03-25T16:09:00.000Z" title="Created 2026-03-26 00:09:00">2026-03-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/22/3.22/" title="1.节点状态方程描述">1.节点状态方程描述</a><time datetime="2026-03-22T11:51:00.000Z" title="Created 2026-03-22 19:51:00">2026-03-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/20/%E9%80%9A%E8%BF%87%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%AE%A8%E8%AE%BA%E5%90%91%E9%87%8F%E7%9A%84%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%80%A7/" title="通过线性方程组讨论向量的线性相关性">通过线性方程组讨论向量的线性相关性</a><time datetime="2025-05-20T04:00:00.000Z" title="Created 2025-05-20 12:00:00">2025-05-20</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Miitesato</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@4.1.0/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
